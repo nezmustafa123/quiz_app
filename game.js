@@ -40,7 +40,7 @@ let questions = [
 
 //CONSTANTS
 const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 5;
+const MAX_QUESTIONS = 3;
 
 //start game function
 
@@ -77,7 +77,8 @@ choices.forEach((choice) => {
     if (!acceptingAnswers) return;
     acceptingAnswers = false;
     const selectedChoice = e.target;
-    const selectedAnswer = selectedChoice.dataset["number"];
+    const selectedAnswer = typeof selectedChoice.dataset["number"];
+    console.log(selectedAnswer, currentQuestion.answer);
     //load new question
     getNewQuestion();
   });
