@@ -29,30 +29,54 @@ let questions = [
     answer: 3,
   },
   {
-    question: " How do you write 'Hello World' in an alert box?",
+    question: "How do you write 'Hello World' in an alert box?",
     choice1: "msgBox('Hello World');",
     choice2: "alertBox('Hello World');",
     choice3: "msg('Hello World');",
     choice4: "alert('Hello World');",
     answer: 4,
   },
+  {
+    question: "What is the world’s largest land mammal?",
+    choice1: "Giraffe",
+    choice2: "Hippo",
+    choice3: "Rhino",
+    choice4: "Elephant",
+    answer: 4,
+  },
+  {
+    question: "The first atom bomb was dropped on which Japanese city?",
+    choice1: "Hiroshima",
+    choice2: "Nagasaki",
+    choice3: "Tokyo",
+    choice4: "Osaka",
+    answer: 1,
+  },
+  {
+    question: "What does a Geiger Counter measure?",
+    choice1: "Coordinates",
+    choice2: "Radiation",
+    choice3: "Water Pressure",
+    choice4: "Current",
+    answer: 2,
+  },
 ];
 
 //CONSTANTS
 const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 3;
+const MAX_QUESTIONS = 5;
 
 //start game function
 
 startGame = () => {
   questionCounter = 0;
   score = 0;
-  availableQuestions = [...questions]; //spread operator to opy questions array into available questions
+  availableQuestions = [...questions]; //spread operator to copy questions array into available questions
   console.log(availableQuestions);
   getNewQuestion();
 };
 getNewQuestion = () => {
-  if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
+  if (availableQuestions.length === 0 || questionCounter === MAX_QUESTIONS) {
     //max questions can change
     return window.location.assign("/end.html");
   }
@@ -76,11 +100,25 @@ choices.forEach((choice) => {
     console.log(e.target);
     if (!acceptingAnswers) return;
     acceptingAnswers = false;
-    const selectedChoice = e.target;
-    const selectedAnswer = typeof selectedChoice.dataset["number"];
-    console.log(selectedAnswer, currentQuestion.answer);
-    //load new question
-    getNewQuestion();
+    const selectedChoice = e.target; //get selected question
+    const selectedAnswer = selectedChoice.dataset["number"]; //get selected question number
+    //const classToApply = "incorrect"; //default class to apply
+    // if (selectedAnswer === currentQuestion.answer) {
+    //   //if is correct then apply the correct class
+    //   classToApply = "correct";
+    // }
+    const classToApply =
+      selectedAnswer == currentQuestion.answer ? "correct" : "incorrect"; //create class to apply variable use double equals current questions answer is a string
+    console.log(selectedAnswer === currentQuestion.answer);
+    console.log(classToApply);
+    selectedChoice.parentElement.classList.add(classToApply); //apply the class depending on the selectedanswer
+    setTimeout(() => {
+      selectedChoice.parentElement.classList.remove(classToApply);
+
+      //load new question
+      getNewQuestion();
+      //load new question
+    }, 1000);
   });
 });
 startGame();
