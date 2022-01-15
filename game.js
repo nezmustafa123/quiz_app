@@ -2,7 +2,9 @@ console.log("Hello world from game");
 
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
-console.log(choices);
+// console.log(choices);
+const questionCounterText = document.getElementById("questionCounter");
+const scoreText = document.getElementById("score");
 
 let currentQuestion = {};
 let acceptingAnswers = false;
@@ -72,7 +74,7 @@ startGame = () => {
   questionCounter = 0;
   score = 0;
   availableQuestions = [...questions]; //spread operator to copy questions array into available questions
-  console.log(availableQuestions);
+  // console.log(availableQuestions);
   getNewQuestion();
 };
 getNewQuestion = () => {
@@ -81,6 +83,7 @@ getNewQuestion = () => {
     return window.location.assign("/end.html");
   }
   questionCounter++; //increment question by one
+  questionCounterText.innerText = `${questionCounter}/${MAX_QUESTIONS}`; //set questiontext
   //get random question index
   const questionIndex = Math.floor(Math.random() * availableQuestions.length); //when one question used will be one less
   currentQuestion = availableQuestions[questionIndex]; //get available questions array with index set it to current questions
@@ -109,8 +112,13 @@ choices.forEach((choice) => {
     // }
     const classToApply =
       selectedAnswer == currentQuestion.answer ? "correct" : "incorrect"; //create class to apply variable use double equals current questions answer is a string
-    console.log(selectedAnswer === currentQuestion.answer);
-    console.log(classToApply);
+    // console.log(selectedAnswer === currentQuestion.answer);
+    // console.log(classToApply);
+
+    if (classToApply === "correct") {
+      //if class to apply is correct
+      incrementScore(CORRECT_BONUS);
+    }
     selectedChoice.parentElement.classList.add(classToApply); //apply the class depending on the selectedanswer
     setTimeout(() => {
       selectedChoice.parentElement.classList.remove(classToApply);
@@ -121,4 +129,9 @@ choices.forEach((choice) => {
     }, 6000);
   });
 });
+
+incrementScore = (num) => {
+  score += num;
+  scoreText.innerText = score;
+};
 startGame();
