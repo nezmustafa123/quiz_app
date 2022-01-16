@@ -3,7 +3,7 @@ console.log("Hello world from game");
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 // console.log(choices);
-const questionCounterText = document.getElementById("questionCounter");
+const progressText = document.getElementById("progressText");
 const scoreText = document.getElementById("score");
 
 let currentQuestion = {};
@@ -83,7 +83,7 @@ getNewQuestion = () => {
     return window.location.assign("/end.html");
   }
   questionCounter++; //increment question by one
-  questionCounterText.innerText = `${questionCounter}/${MAX_QUESTIONS}`; //set questiontext
+  progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`; //set questiontext
   //get random question index
   const questionIndex = Math.floor(Math.random() * availableQuestions.length); //when one question used will be one less
   currentQuestion = availableQuestions[questionIndex]; //get available questions array with index set it to current questions
@@ -131,7 +131,7 @@ choices.forEach((choice) => {
 });
 
 incrementScore = (num) => {
-  score += num;
+  score += num; //mutate score variable outside
   scoreText.innerText = score;
 };
 startGame();
