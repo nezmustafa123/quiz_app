@@ -95,7 +95,7 @@ getNewQuestion = () => {
   });
 
   availableQuestions.splice(questionIndex, 1); //get the available questions array splice out the question used start at questionindex and take out one
-  console.log(availableQuestions);
+  // console.log(availableQuestions);
   acceptingAnswers = true;
 };
 choices.forEach((choice) => {
