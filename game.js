@@ -5,6 +5,7 @@ const choices = Array.from(document.getElementsByClassName("choice-text"));
 // console.log(choices);
 const progressText = document.getElementById("progressText");
 const scoreText = document.getElementById("score");
+const progressBarFull = document.getElementById("progressBarFull");
 
 let currentQuestion = {};
 let acceptingAnswers = false;
@@ -84,6 +85,10 @@ getNewQuestion = () => {
   }
   questionCounter++; //increment question by one
   progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`; //set questiontext
+  //whenever increment question update progress bar set width property
+  console.log(questionCounter / MAX_QUESTIONS);
+  progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
+
   //get random question index
   const questionIndex = Math.floor(Math.random() * availableQuestions.length); //when one question used will be one less
   currentQuestion = availableQuestions[questionIndex]; //get available questions array with index set it to current questions
