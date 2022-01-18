@@ -80,6 +80,8 @@ startGame = () => {
 };
 getNewQuestion = () => {
   if (availableQuestions.length === 0 || questionCounter === MAX_QUESTIONS) {
+    //when ending game save the score to access in the end screen
+    localStorage.setItem("mostRecentScore", score);
     //max questions can change
     return window.location.assign("/end.html");
   }
