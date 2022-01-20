@@ -31,6 +31,6 @@ saveHighScore = (e) => {
   highScores.splice(5); //splice aeverything after index 5
   //update highscores and strinfiy into json
   localStorage.setItem("highSocres", JSON.stringify(highScores));
-  // window.location.assign("/");
+  window.location.assign("/");
   console.log(highScores);
 };
