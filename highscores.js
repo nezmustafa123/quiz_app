@@ -7,6 +7,6 @@ highScoresList.innerHTML = highScores
     //returns array of strings
     //map through highscores and add an li for each
 
-    return `<li class="high-score">${score.name}-${score.score}</li>`;
+    return `<li class="high-score">${score.name} - ${score.score}</li>`;
   })
   .join(""); //join string
