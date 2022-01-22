@@ -1,4 +1,7 @@
 console.log("Hello world from game");
+//CONSTANTS
+const CORRECT_BONUS = 10;
+const MAX_QUESTIONS = 5;
 
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
@@ -29,10 +32,6 @@ fetch("questions.json")
   .catch((err) => {
     console.error(err);
   });
-
-//CONSTANTS
-const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 5;
 
 //start game function
 
