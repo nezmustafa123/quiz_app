@@ -13,57 +13,22 @@ let score = 0;
 let questionCounter = 0; //what question user is on
 let availableQuestions = []; //copy full question set
 
-let questions = [
-  {
-    question: "Inside which HTML element do we put the JavaScript??",
-    choice1: "<script>",
-    choice2: "<javascript>",
-    choice3: "<js>",
-    choice4: "<scripting>",
-    answer: 1,
-  },
-  {
-    question:
-      "What is the correct syntax for referring to an external script called 'xxx.js'?",
-    choice1: "<script href='xxx.js'>",
-    choice2: "<script name='xxx.js'>",
-    choice3: "<script src='xxx.js'>",
-    choice4: "<script file='xxx.js'>",
-    answer: 3,
-  },
-  {
-    question: "How do you write 'Hello World' in an alert box?",
-    choice1: "msgBox('Hello World');",
-    choice2: "alertBox('Hello World');",
-    choice3: "msg('Hello World');",
-    choice4: "alert('Hello World');",
-    answer: 4,
-  },
-  {
-    question: "What is the world’s largest land mammal?",
-    choice1: "Giraffe",
-    choice2: "Hippo",
-    choice3: "Rhino",
-    choice4: "Elephant",
-    answer: 4,
-  },
-  {
-    question: "The first atom bomb was dropped on which Japanese city?",
-    choice1: "Hiroshima",
-    choice2: "Nagasaki",
-    choice3: "Tokyo",
-    choice4: "Osaka",
-    answer: 1,
-  },
-  {
-    question: "What does a Geiger Counter measure?",
-    choice1: "Coordinates",
-    choice2: "Radiation",
-    choice3: "Water Pressure",
-    choice4: "Current",
-    answer: 2,
-  },
-];
+let questions = [];
+//pull questions from file
+fetch("questions.json")
+  .then((res) => {
+    //http response
+    console.log(res);
+    return res.json(); //get body and return json
+  })
+  .then((loadedQuestions) => {
+    console.log(loadedQuestions);
+    questions = loadedQuestions;
+    startGame();
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 //CONSTANTS
 const CORRECT_BONUS = 10;
@@ -141,4 +106,3 @@ incrementScore = (num) => {
   score += num; //mutate score variable outside
   scoreText.innerText = score;
 };
-startGame();
