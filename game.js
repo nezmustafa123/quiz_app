@@ -18,7 +18,7 @@ let availableQuestions = []; //copy full question set
 
 let questions = [];
 //pull questions from file
-fetch("questions.json")
+fetch("https://opentdb.com/api.php?amount=10&category=9")
   .then((res) => {
     //http response
     console.log(res);
@@ -26,8 +26,8 @@ fetch("questions.json")
   })
   .then((loadedQuestions) => {
     console.log(loadedQuestions);
-    questions = loadedQuestions;
-    startGame();
+    // questions = loadedQuestions;
+    // startGame();
   })
   .catch((err) => {
     console.error(err);
