@@ -25,7 +25,22 @@ fetch("https://opentdb.com/api.php?amount=10&category=9")
     return res.json(); //get body and return json
   })
   .then((loadedQuestions) => {
-    console.log(loadedQuestions);
+    console.log(loadedQuestions.results);
+    loadedQuestions.results.map((loadedQuestion) => {
+      const formattedQuestion = {
+        question: loadedQuestion.question,
+      };
+
+      const answerChoices = [...loadedQuestion.incorrect_answers];
+      console.log(formattedQuestion);
+      formattedQuestion.answer = Math.floor(Math.random() * 3) + 1; //random index 0-3
+      console.log(formattedQuestion.answer);
+      answerChoices.splice(
+        formattedQuestion.answer - 1,
+        0, //dont remove
+        loadedQuestion.correct_answer
+      );
+    });
     // questions = loadedQuestions;
     // startGame();
   })
