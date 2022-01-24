@@ -49,9 +49,7 @@ fetch("https://opentdb.com/api.php?amount=10&category=9")
       console.log(formattedQuestion);
       return formattedQuestion;
     });
-    //show game and hide loader
-    game.classList.remove("hidden");
-    loader.classList.add("hidden");
+
     startGame();
   })
   .catch((err) => {
@@ -66,6 +64,9 @@ startGame = () => {
   availableQuestions = [...questions]; //spread operator to copy questions array into available questions
   // console.log(availableQuestions);
   getNewQuestion();
+  //show game and hide loader
+  game.classList.remove("hidden");
+  loader.classList.add("hidden");
 };
 getNewQuestion = () => {
   if (availableQuestions.length === 0 || questionCounter === MAX_QUESTIONS) {
