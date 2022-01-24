@@ -1,7 +1,7 @@
 console.log("Hello world from game");
 //CONSTANTS
 const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 5;
+const MAX_QUESTIONS = 10;
 
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
@@ -26,23 +26,29 @@ fetch("https://opentdb.com/api.php?amount=10&category=9")
   })
   .then((loadedQuestions) => {
     console.log(loadedQuestions.results);
-    loadedQuestions.results.map((loadedQuestion) => {
+    questions = loadedQuestions.results.map((loadedQuestion) => {
+      //return and chuck formatted question into questions array
       const formattedQuestion = {
         question: loadedQuestion.question,
       };
-
+      //declate variable inside the loop have to do it for each question
       const answerChoices = [...loadedQuestion.incorrect_answers];
       console.log(formattedQuestion);
       formattedQuestion.answer = Math.floor(Math.random() * 3) + 1; //random index 0-3
       console.log(formattedQuestion.answer);
       answerChoices.splice(
-        formattedQuestion.answer - 1,
+        formattedQuestion.answer - 1, //sero based inde
         0, //dont remove
         loadedQuestion.correct_answer
       );
+      answerChoices.forEach((choice, index) => {
+        formattedQuestion["choice" + (index + 1)] = choice; //create new property choice1, choice2 etc
+      });
+      console.log(formattedQuestion);
+      return formattedQuestion;
     });
-    // questions = loadedQuestions;
-    // startGame();
+
+    startGame();
   })
   .catch((err) => {
     console.error(err);
@@ -80,7 +86,7 @@ getNewQuestion = () => {
     choice.innerText = currentQuestion["choice" + number]; //out of current question object get spefici choice property depending on number from dataset property
   });
 
-  availableQuestions.splice(questionIndex, 1); //get the available questions array splice out the question used start at questionindex and take out one
+  availableQuestions.splice(questionIndex, 1); //get the available questions array splice out the question answered used splice start at questionindex and take out one
   // console.log(availableQuestions);
   acceptingAnswers = true;
 };
