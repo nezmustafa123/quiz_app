@@ -31,10 +31,10 @@ var pJS = function (tag_id, params) {
         value: "#fff",
       },
       shape: {
-        type: "circle",
+        type: "square",
         stroke: {
           width: 0,
-          color: "#ff0000",
+          color: "0",
         },
         polygon: {
           nb_sides: 5,
@@ -871,8 +871,7 @@ var pJS = function (tag_id, params) {
         init();
       }
     } else if (
-
-    /* on click event */
+      /* on click event */
       pJS.interactivity.events.onclick.enable &&
       isInArray("bubble", pJS.interactivity.events.onclick.mode)
     ) {
